@@ -1,5 +1,6 @@
 # meta_placebo-cannabis_altmetric
-Code relating to obtaining data from public API from Altmetric 
+Code relating to obtaining data from public API from Altmetric for article: **Placebo responses in randomized clinical trials assessing cannabinoid, cannabis, and cannabis-based medicine for clinical pain**
+
 
 
 ## Requirement
