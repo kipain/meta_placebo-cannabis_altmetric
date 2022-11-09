@@ -1,4 +1,4 @@
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 import json
 import pandas as pd
@@ -9,6 +9,10 @@ import time
 df = pd.read_csv('./DOI_Cannabis.csv', sep=',', header=None)
 # just grab the dois and drop any nans
 dois = df[0].dropna()
+
+# header information so altmetric accepts the request
+user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
+headers={'User-Agent':user_agent,}
 
 # Loop through each doi
 altmetinfo = {}
@@ -29,7 +33,8 @@ for i, doi in dois.iteritems():
     try:
         # Query the altmeric DOI, grab a json.
         # If doing this a lot (>10,000, should add an API key)
-        r = urlopen(url)
+        r = Request(url, None, headers)
+        r = urlopen(r)
         r = r.read()
         altmetinfo[i] = json.loads(r.decode("utf-8"))
         print('Entry found at altmetric')
